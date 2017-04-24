@@ -1,21 +1,19 @@
-﻿Der Buildvorgang wurde am 24.04.2017 14:47:00 gestartet.
-     1>Projekt "C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\opencv_test\opencv_test.vcxproj" auf Knoten "2", Build Ziel(e).
+﻿Build started 24.04.2017 19:04:42.
+     1>Project "C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\opencv_test\opencv_test.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 2013\VC\bin\CL.exe /c /IC:\UNI\StereoVision\opencv\build\include /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\opencv_test.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
-         stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 2013\VC\bin\CL.exe /c /IC:\UNI\StereoVision\opencv\build\include /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\opencv_test.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp opencv_test.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IC:\OpenCV\opencv\build\include /IC:\UNI\StereoVision\opencv\build\include /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\opencv_test.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-         opencv_test.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\Release\opencv_test.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\UNI\StereoVision\opencv\build\x86\vc12\lib opencv_calib3d2413d.lib opencv_contrib2413d.lib opencv_core2413d.lib opencv_features2d2413d.lib opencv_flann2413d.lib opencv_gpu2413d.lib opencv_highgui2413d.lib opencv_imgproc2413d.lib opencv_legacy2413d.lib opencv_ml2413d.lib opencv_objdetect2413d.lib opencv_ts2413d.lib opencv_video2413d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\Release\opencv_test.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\Release\opencv_test.lib" /MACHINE:X86 /SAFESEH Release\main.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\Release\opencv_test.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\OpenCV\opencv\build\x86\vc12\lib /LIBPATH:C:\UNI\StereoVision\opencv\build\x86\vc12\lib opencv_calib3d2413d.lib opencv_contrib2413d.lib opencv_core2413d.lib opencv_features2d2413d.lib opencv_flann2413d.lib opencv_gpu2413d.lib opencv_highgui2413d.lib opencv_imgproc2413d.lib opencv_legacy2413d.lib opencv_ml2413d.lib opencv_objdetect2413d.lib opencv_ts2413d.lib opencv_video2413d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\Release\opencv_test.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\Release\opencv_test.lib" /MACHINE:X86 /SAFESEH Release\CostVolume.obj
+         Release\main.obj
          Release\opencv_test.obj
          Release\stdafx.obj
-     1>LINK : warning LNK4067: Mehrdeutiger Einstiegspunkt; "mainCRTStartup" ausgewählt.
-         Code wird generiert.
-         Codegenerierung ist abgeschlossen.
-         opencv_test.vcxproj -> C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\Release\opencv_test.exe
-     1>Die Erstellung des Projekts "C:\UNI\StereoVision\StereoVision\Exercise2\opencv_test\opencv_test\opencv_test.vcxproj" ist abgeschlossen, Build Ziel(e).
+     1>LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
+         Generating code
+         Finished generating code
+         opencv_test.vcxproj -> C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\Release\opencv_test.exe
+     1>Done Building Project "C:\Users\Warez Crash\Dropbox\ROBIN_HOME\UNIVERSITY\STEREO VISION\OpenCV_Testproject\StereoVision\Exercise2\opencv_test\opencv_test\opencv_test.vcxproj" (Build target(s)).
 
-Build erfolgreich.
+Build succeeded.
 
-Verstrichene Zeit 00:00:05.25
+Time Elapsed 00:00:01.63
