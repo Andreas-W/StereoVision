@@ -11,8 +11,8 @@ using namespace std;
 int main()
 {
 	string filepath = "..\\images\\";
-	Mat img1 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
-	Mat img2 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
+	Mat img2 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
+	Mat img1 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
 	
 	imshow("Left", img1);
 	imshow("Right", img2);

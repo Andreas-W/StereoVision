@@ -1,0 +1,6 @@
+*.log
+Exercise2/opencv_test/opencv_test/Debug/
+Exercise2/opencv_test/opencv_test/Release/
+/Exercise2/opencv_test/opencv_test/Debug/opencv_test.Build.CppClean.log
+/Exercise2/opencv_test/opencv_test/Debug/vc120.idb
+/Exercise2/opencv_test/opencv_test/Debug/vc120.pdb

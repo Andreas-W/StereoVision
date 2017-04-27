@@ -49,7 +49,12 @@ try
 							Vec3b diff;
 							absdiff(color1, color2, diff);
 							sum_w += sum(diff)[0];
-							//sum_w += (diff[0] + diff[1] + diff[2]);
+
+
+							//int r = abs((int)color1.val[0] - (int)color2.val[0]);
+							//int g = abs((int)color1.val[1] - (int)color2.val[1]);
+							//int b = abs((int)color1.val[2] - (int)color2.val[2]);
+							//sum_w += (r + g + b);
 						}
 					}
 				}
