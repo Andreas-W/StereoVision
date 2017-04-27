@@ -43,8 +43,8 @@ try
 
 						//check if pixel is within image
 						if (x1 >= 0 && x1 < width && x2 >= 0 && x2 < width && y >= 0 && y < height) {
-							Vec3b color1 = imgLeft.at<Vec3b>(y, x1); // vgl Matlab ;)
-							Vec3b color2 = imgRight.at<Vec3b>(y, x2);
+							Vec3b color1 = imgLeft.at<Vec3b>(y, x2); // vgl Matlab ;)
+							Vec3b color2 = imgRight.at<Vec3b>(y, x1);
 
 							Vec3b diff;
 							absdiff(color1, color2, diff);
@@ -58,9 +58,9 @@ try
 						}
 					}
 				}
-				costL.at<int>(j, i) = sum_w;
+				costR.at<int>(j, i) = sum_w;
 				if ((i+d) < width) // Otherwise out of range exception
-					costR.at<int>(j, i + d) = sum_w;
+					costL.at<int>(j, i+d) = sum_w;
 			}
 		}
 		costVolumeLeft.at(d) = costL;

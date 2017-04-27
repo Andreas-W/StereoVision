@@ -11,8 +11,8 @@ using namespace std;
 int main()
 {
 	string filepath = "..\\images\\";
-	Mat img2 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
-	Mat img1 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
+	Mat img1 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
+	Mat img2 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
 	
 	imshow("Left", img1);
 	imshow("Right", img2);
@@ -102,20 +102,51 @@ int main()
 		}
 	}
 
-	//disparityL *= (255 / maxDisp);
-	//disparityR *= (255 / maxDisp);
+	disparityL *= (255 / maxDisp); //Should be same depth-colors as groundTruth
+	disparityR *= (255 / maxDisp);
 
-	cv::normalize(disparityL, disparityL, 0, 255, NORM_MINMAX);
-	cv::normalize(disparityR, disparityR, 0, 255, NORM_MINMAX);
+	//cv::normalize(disparityL, disparityL, 0, 255, NORM_MINMAX);
+	//cv::normalize(disparityR, disparityR, 0, 255, NORM_MINMAX);
 
 
-	cv::imwrite(filepath + "_DisparityMapLeft_.jpg", disparityL);
-	cv::imwrite(filepath + "_DisparityMapRight_.jpg", disparityR);
+	std::string fnameL = filepath + "DisparityMapLeft_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
+	std::string fnameR = filepath + "DisparityMapRight_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
+	cv::imwrite(fnameL, disparityL);
+	cv::imwrite(fnameR, disparityR);
 
-	Mat disMap1 = imread(filepath + "_DisparityMapLeft_.jpg");
+	Mat disMap1 = imread(fnameL);
 	imshow("Disparity Mat Left", disMap1);
-	Mat disMap2 = imread(filepath + "_DisparityMapRight_.jpg");
+	Mat disMap2 = imread(fnameR);
 	imshow("Disparity Mat Right", disMap2);
+
+
+	//--------------------------
+	//Evaluation
+	//---------------
+	Mat img_gt = imread(filepath + "tsukuba_gt.png", CV_LOAD_IMAGE_GRAYSCALE);
+	//Crop images to ignore borders
+	/* sets the Region of Interest*/
+	Rect R(Point(18,18), Point(366, 270)); //Create a rect 
+	Mat1b m_gt = img_gt(R);
+	Mat1b m_dL = disparityL(R);
+	//Mat1b m_dR = disparityR(R);
+
+	Mat1b m_eL = abs(m_gt - m_dL);
+	//Mat1b m_eR = abs(m_gt - m_dR);
+
+	threshold(m_eL, m_eL, (255 / maxDisp), 255, THRESH_BINARY);
+	//threshold(m_eR, m_eR, (255 / maxDisp), 255, THRESH_BINARY);
+
+	fnameL = filepath + "ErrorMapLeft_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
+	//fnameR = filepath + "ErrorMapRight_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
+	cv::imwrite(fnameL, m_eL);
+	//cv::imwrite(fnameR, m_eR);
+
+	disMap1 = imread(fnameL);
+	imshow("Error Mat Left", disMap1);
+	//disMap2 = imread(fnameR);
+	//imshow("Error Mat Right", disMap2);
+
 
 	cv::waitKey(0);
 	return 0;
