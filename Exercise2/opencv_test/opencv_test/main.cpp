@@ -11,61 +11,23 @@ using namespace std;
 int main()
 {
 	string filepath = "..\\images\\";
+	//IplImage* img = cvLoadImage("..\\images\\tsukuba_left.png");
+	//Mat img1 = Mat(img);
+	//img = cvLoadImage("..\\images\\tsukuba_right.png");
+	//Mat img2 = Mat(img);
 	Mat img1 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
 	Mat img2 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
 	
-	imshow("Left", img1);
-	imshow("Right", img2);
-	
-	//cv::Mat diff;
-	//cv::absdiff(img1, img2, diff);
-	//cv::imshow("result", diff);
+	//imshow("Left", img1);
+	//imshow("Right", img2);
 
-	int windowSize = 5; // 5
+	int windowSize = 7; // 5
 	int maxDisp = 15; // 15
 
 	// Compute Cost Volume
 	vector<Mat> costVolumeLeft(maxDisp); // Need to allocate memory
 	vector<Mat> costVolumeRight(maxDisp);
 	CostVolume::computeCostVolume(img1, img2, costVolumeLeft, costVolumeRight, windowSize, maxDisp);
-
-	/*
-	// Display the cost volume maps
-	for (int i = 0; i < maxDisp; i++)
-	{
-		Mat costVolumeMat1 = costVolumeLeft.at(i);
-		Mat costVolumeMat2 = costVolumeRight.at(i);
-
-		// Normalize Values to a grayscaled image to display them
-		normalize(costVolumeMat1, costVolumeMat1, 255, 0, NORM_MINMAX);
-		normalize(costVolumeMat2, costVolumeMat2, 255, 0, NORM_MINMAX);
-
-		// Set leading '0' to the number
-		ostringstream ss;
-		ss << setw(3) << std::setfill('0') << i;
-		string s_number(ss.str());
-		
-		// Save images otherwise for some bug they cannot be displayed
-		imwrite( filepath+"DisparityMapLeft"  + s_number + ".jpg", costVolumeMat1 );
-		imwrite( filepath+"DisparityMapRight" + s_number + ".jpg", costVolumeMat2 );
-
-		// Display 
-		Mat disMap1 = imread(filepath+"DisparityMapLeft"  + s_number + ".jpg");
-		imshow("Disparity Mat Left" + s_number, disMap1);
-		Mat disMap2 = imread(filepath+"DisparityMapRight"  + s_number + ".jpg");
-		imshow("Disparity Mat Right" + s_number, disMap2);
-
-	}
-	*/
-
-	// Just for testing
-	/*for (int i = 0; i < costVolumeMat1.rows; i++)  
-	{
-		for (int j = 0; j < costVolumeMat1.cols; j++)
-		{
-			printf("Val: %i\n", costVolumeMat1.at<int>(i,j));
-		}
-	}*/
 
 	Mat1i disparityL(img1.rows, img1.cols, 0);
 	Mat1i disparityR(img1.rows, img1.cols, 0);
@@ -103,29 +65,29 @@ int main()
 	}
 
 	disparityL *= (255 / maxDisp); //Should be same depth-colors as groundTruth
-	disparityR *= (255 / maxDisp);
+	//disparityR *= (255 / maxDisp);
 
 	//cv::normalize(disparityL, disparityL, 0, 255, NORM_MINMAX);
 	//cv::normalize(disparityR, disparityR, 0, 255, NORM_MINMAX);
 
-
+	//imshow("Left Disparity Map", disparityL);
 	std::string fnameL = filepath + "DisparityMapLeft_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
-	std::string fnameR = filepath + "DisparityMapRight_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
+	//std::string fnameR = filepath + "DisparityMapRight_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
 	cv::imwrite(fnameL, disparityL);
-	cv::imwrite(fnameR, disparityR);
+	//cv::imwrite(fnameR, disparityR);
 
 	Mat disMap1 = imread(fnameL);
 	imshow("Disparity Mat Left", disMap1);
-	Mat disMap2 = imread(fnameR);
-	imshow("Disparity Mat Right", disMap2);
+	//Mat disMap2 = imread(fnameR);
+	//imshow("Disparity Mat Right", disMap2);
 
 
+	/*
 	//--------------------------
 	//Evaluation
 	//---------------
 	Mat img_gt = imread(filepath + "tsukuba_gt.png", CV_LOAD_IMAGE_GRAYSCALE);
 	//Crop images to ignore borders
-	/* sets the Region of Interest*/
 	Rect R(Point(18,18), Point(366, 270)); //Create a rect 
 	Mat1b m_gt = img_gt(R);
 	Mat1b m_dL = disparityL(R);
@@ -147,6 +109,7 @@ int main()
 	//disMap2 = imread(fnameR);
 	//imshow("Error Mat Right", disMap2);
 
+	*/
 
 	cv::waitKey(0);
 	return 0;
