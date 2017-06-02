@@ -21,7 +21,7 @@ int main()
 	//imshow("Left", img1);
 	//imshow("Right", img2);
 
-	int windowSize = 10; // 5
+	int windowSize = 15; // 5
 	int maxDisp = 15; // 15
 
 	// Compute Cost Volume
