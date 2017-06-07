@@ -18,10 +18,10 @@ int main()
 {
 	string filepath = "..\\images\\";
 
-	int windowSize = 5; // 5
+	int windowSize = 9; // 5
 	int maxDisp = 15; // 15
 
-	if (false) {
+	if (true) {
 
 	//IplImage* img = cvLoadImage("..\\images\\tsukuba_left.png");
 	//Mat img1 = Mat(img);

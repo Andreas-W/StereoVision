@@ -18,7 +18,7 @@ void CostVolume::computeCostVolume(const cv::Mat &imgLeft, const cv::Mat &imgRig
 	int w = windowSize / 2; //.. 5 / 2 = 2;
 
 	float gamma_c = 7.0f; //7.0f values from paper
-	float gamma_p = 33.0f;//36.0f;
+	float gamma_p = 9.0f; // 14.0f; //33.0f;//36.0f;
 	
 try
 {
