@@ -18,7 +18,7 @@ int main()
 {
 	string filepath = "..\\images\\";
 
-	int windowSize = 9; // 5
+	int windowSize = 5; // 5
 	int maxDisp = 15; // 15
 
 	if (true) {
@@ -144,8 +144,11 @@ void evaluation(cv::Mat &disparityL, cv::Mat &disparityR, int maxDisp, int windo
 	//Crop images to ignore borders
 	Rect R(Point(18,18), Point(366, 270)); //Create a rect 
 	Mat1b m_gt = img_gt(R);
-	Mat1b m_dL = disparityL(R);
-	Mat1b m_dR = disparityR(R);
+	Mat1b m_dL = disparityL(R).clone();
+	Mat1b m_dR = disparityR(R).clone();
+
+	m_dL = m_dL * (255/maxDisp);
+	m_dR = m_dR * (255/maxDisp);
 
 	Mat1b m_eL = abs(m_gt - m_dL);
 	Mat1b m_eR = abs(m_gt - m_dR);
@@ -303,13 +306,17 @@ void saveAndShowDisparityMaps(cv::Mat disparityL, cv::Mat disparityR, int maxDis
 	string filepath = "..\\images\\";
 	
 	// Compute Pixel Values to visualize again
-	disparityL *= (255 / maxDisp); //Should be same depth-colors as groundTruth
-	disparityR *= (255 / maxDisp);
+
+	Mat1i dispL = disparityL.clone();
+	Mat1i dispR = disparityR.clone();
+
+	dispL *= (255 / maxDisp); //Should be same depth-colors as groundTruth
+	dispR *= (255 / maxDisp);
 
 	std::string fnameL = filepath + name + "Left_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
 	std::string fnameR = filepath + name + "Right_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
-	cv::imwrite(fnameL, disparityL);
-	cv::imwrite(fnameR, disparityR);
+	cv::imwrite(fnameL, dispL);
+	cv::imwrite(fnameR, dispR);
 	
 	Mat disMap1 = imread(fnameL);
 	imshow(name + "Disparity Mat Left", disMap1);
