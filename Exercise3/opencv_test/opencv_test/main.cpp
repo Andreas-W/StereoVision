@@ -18,27 +18,18 @@ int main()
 {
 	string filepath = "..\\images\\";
 
-	int windowSize = 5; // 5
+	int windowSize = 11; // 5
 	int maxDisp = 15; // 15
 
-	if (true) {
 
-	//IplImage* img = cvLoadImage("..\\images\\tsukuba_left.png");
-	//Mat img1 = Mat(img);
-	//img = cvLoadImage("..\\images\\tsukuba_right.png");
-	//Mat img2 = Mat(img);
 	Mat img1 = imread(filepath+"tsukuba_left.png", CV_LOAD_IMAGE_COLOR);
 	Mat img2 = imread(filepath+"tsukuba_right.png", CV_LOAD_IMAGE_COLOR);
 	
-	//imshow("Left", img1);
-	//imshow("Right", img2);
-
 
 	// Compute Cost Volume
 	vector<Mat> costVolumeLeft(maxDisp); // Need to allocate memory
 	vector<Mat> costVolumeRight(maxDisp);
 	CostVolume::computeCostVolume(img1, img2, costVolumeLeft, costVolumeRight, windowSize, maxDisp);
-
 
 	// Winner Takes it All - Get final Disparity Maps
 	Mat1i disparityL(img1.rows, img1.cols, 0);
@@ -88,49 +79,6 @@ int main()
 
 	// imshow and save
 	saveAndShowDisparityMaps(disparityL, disparityR, maxDisp, windowSize, "Refined");
-
-	} // end if just for debbuging refineDisparity
-	else 
-	{   // Just for Debug reasons if on Task 2 Refine disparity is worked on
-		// Read in already computed disparity maps
-		std::string fnameL = filepath + "DisparityMapWithoutRefineLeft_w"  + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
-		std::string fnameR = filepath + "DisparityMapWithoutRefineRight_w" + to_string(windowSize) + "_d" + to_string(maxDisp) + ".png";
-	
-		Mat dispL = imread(fnameL);
-		cv::imshow("Disparity Mat Left", dispL);
-		Mat dispR = imread(fnameR);
-		cv::imshow("Disparity Mat Right", dispR);
-	
-		// Compute back to output of computeCostVolume
-		int width = dispL.cols;	int height = dispL.rows;
-		Mat1i disparityL(height, width, -1);
-		Mat1i disparityR(height, width, -1);
-		// Take only first dimension
-		for(int i=0; i < height; i++)
-		{
-			const Vec3b* r_pixel = dispR.ptr<Vec3b>(i);
-			const Vec3b* l_pixel = dispL.ptr<Vec3b>(i);
-			for (int j = 0; j < width; j++)
-			{
-				Vec3b d_r = r_pixel[j];
-				Vec3b d_l = l_pixel[j];
-				disparityR.at<int>(i,j) = d_r[0];
-				disparityL.at<int>(i,j) = d_l[0];
-			}
-		}
-		disparityR = (disparityR * maxDisp) / 255;
-		disparityL = (disparityL * maxDisp) / 255;
-
-		// Task 2 - Refine Disparity Map
-		int scaleDispFactor = 5;
-		refineDisparity(disparityL, disparityR, scaleDispFactor);
-
-		// imshow and save
-		saveAndShowDisparityMaps(disparityL, disparityR, maxDisp, windowSize, "Refined");
-
-		// evaluation
-		evaluation(disparityL, disparityR, maxDisp, windowSize);
-	}	
 
 	cv::waitKey(0);
 	return 0;
